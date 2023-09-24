@@ -1,0 +1,4 @@
+Você pode executar este projeto tanto utilizando a classe Principal no pacote br/com/ada, ou executar com interface grafica atraves da classe PrincipalController, que esta no pacote br/com/ada/controller.
+
+
+WB
