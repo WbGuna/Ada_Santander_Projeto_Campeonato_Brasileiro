@@ -71,8 +71,6 @@ public class PrincipalController {
             curiosidadeController.createAndShowGUI();
         });
 
-		 
-
 		panel.add(golsButton);
 		panel.add(estatisticaButton);
 		panel.add(cartoesButton);
