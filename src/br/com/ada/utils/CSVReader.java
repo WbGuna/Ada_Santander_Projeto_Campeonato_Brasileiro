@@ -3,6 +3,7 @@ package br.com.ada.utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -18,8 +19,9 @@ public class CSVReader {
 
 	public static List<CampeonatoBrasileiroGols> readGolsCSV(String filePath) {
 		List<CampeonatoBrasileiroGols> gols = new ArrayList<>();
+		String absolutePath = Paths.get(filePath).toAbsolutePath().toString();
 		String line;
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(absolutePath))) {
 			br.readLine(); // Ignora a primeira linha (cabeçalho do CSV)
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
@@ -41,8 +43,9 @@ public class CSVReader {
 
 	public static List<CampeonatoBasileiroFull> readPartidasCSV(String filePath) {
 		List<CampeonatoBasileiroFull> partidas = new ArrayList<>();
+		String absolutePath = Paths.get(filePath).toAbsolutePath().toString();
 		String line;
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(absolutePath))) {
 			br.readLine(); // Ignora a primeira linha (cabeçalho do CSV)
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
@@ -74,8 +77,9 @@ public class CSVReader {
 
 	public static List<CampeonatoBrasileiroEstatisticaFull> readEstatisticasCSV(String filePath) {
 		List<CampeonatoBrasileiroEstatisticaFull> estatisticas = new ArrayList<>();
+		String absolutePath = Paths.get(filePath).toAbsolutePath().toString();
 		String line;
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(absolutePath))) {
 			br.readLine(); // Ignora a primeira linha (cabeçalho do CSV)
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
@@ -104,8 +108,9 @@ public class CSVReader {
 
 	public static List<CampeonatoBrasileiroCartoes> readCartoesCSV(String filePath) {
 		List<CampeonatoBrasileiroCartoes> cartoes = new ArrayList<>();
+		String absolutePath = Paths.get(filePath).toAbsolutePath().toString();
 		String line;
-		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(absolutePath))) {
 			br.readLine(); // Ignora a primeira linha (cabeçalho do CSV)
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
