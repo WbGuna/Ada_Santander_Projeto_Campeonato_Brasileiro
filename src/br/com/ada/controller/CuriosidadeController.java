@@ -21,7 +21,7 @@ public class CuriosidadeController {
 	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Curiosidades");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(600, 400);
+		frame.setSize(650, 300);
 
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);

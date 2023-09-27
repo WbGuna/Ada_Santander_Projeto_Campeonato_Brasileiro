@@ -21,7 +21,7 @@ public class PartidaController {
 	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Partidas");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(600, 400);
+		frame.setSize(800, 600);
 
 		List<CampeonatoBasileiroFull> partidas = fullService
 				.loadData("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");

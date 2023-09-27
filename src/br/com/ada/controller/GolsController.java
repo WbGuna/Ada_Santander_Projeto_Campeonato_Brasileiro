@@ -21,7 +21,7 @@ public class GolsController {
 	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Gols");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(600, 400);
+		frame.setSize(800, 600);
 
 		List<CampeonatoBrasileiroGols> gols = golsService
 				.loadData("src/br/com/ada/arquivosCSV/campeonato-brasileiro-gols.csv");

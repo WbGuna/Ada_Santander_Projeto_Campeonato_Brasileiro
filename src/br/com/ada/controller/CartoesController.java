@@ -21,7 +21,7 @@ public class CartoesController {
 	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Cartões");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(600, 400);
+		frame.setSize(800, 600);
 
 		List<CampeonatoBrasileiroCartoes> cartoes = cartoesService
 				.loadData("src/br/com/ada/arquivosCSV/campeonato-brasileiro-cartoes.csv");

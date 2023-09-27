@@ -21,7 +21,7 @@ public class EstatisticaController {
 	public void createAndShowGUI() {
 		JFrame frame = new JFrame("Estatísticas");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(600, 400);
+		frame.setSize(800, 600);
 
 		List<CampeonatoBrasileiroEstatisticaFull> estatisticas = estatisticaService
 				.loadData("src/br/com/ada/arquivosCSV/campeonato-brasileiro-estatisticas-full.csv");
