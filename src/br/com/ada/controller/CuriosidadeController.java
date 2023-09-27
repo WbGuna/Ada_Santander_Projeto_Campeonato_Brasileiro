@@ -28,12 +28,11 @@ public class CuriosidadeController {
 
 		Map.Entry<String, Long> timeComMaisVitorias = perguntasService
 				.timeQueMaisVenceu2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
-		textArea.append("O time que mais venceu em 2008 foi " + timeComMaisVitorias.getKey() + " com "
-				+ timeComMaisVitorias.getValue() + " vitórias.\n");
+		textArea.append("Quantidade de partidas com empate em 2008 foram " + timeComMaisVitorias.getValue() + "\n");
 
 		Map.Entry<String, Long> segundoTimeComMaisVitorias = perguntasService
 				.timeQueMaisVenceu2008Dois("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
-		textArea.append("O segundo time que mais venceu em 2008 foi " + segundoTimeComMaisVitorias.getKey() + " com "
+		textArea.append("O Time que mais venceu em 2008 foi " + segundoTimeComMaisVitorias.getKey() + " com "
 				+ segundoTimeComMaisVitorias.getValue() + " vitórias.\n");
 
 		Map.Entry<String, Long> estadoComMenosJogos = perguntasService
