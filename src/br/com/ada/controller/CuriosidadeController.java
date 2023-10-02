@@ -1,6 +1,9 @@
 package br.com.ada.controller;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -26,15 +29,33 @@ public class CuriosidadeController {
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 
-		Map.Entry<String, Long> timeComMaisVitorias = perguntasService
-				.timeQueMaisVenceu2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
-		textArea.append("Quantidade de partidas com empate em 2008 foram " + timeComMaisVitorias.getValue() + "\n");
+		Map.Entry<String, Long> timeComMaisEmpates = perguntasService
+				.timeQueMaisEmpatou2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
+		textArea.append("Quantidade de partidas com empate em 2008 foram " + timeComMaisEmpates.getValue() + "\n");
+		
+		List<Map.Entry<String, Long>> timesComMaisVitorias = perguntasService.timesQueMaisVenceram2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
+		Map<Object, Long> empatesDosTimesVencedores = perguntasService.empatesDosTimesVencedores2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv", timesComMaisVitorias);
 
-		Map.Entry<String, Long> segundoTimeComMaisVitorias = perguntasService
-				.timeQueMaisVenceu2008Dois("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
-		textArea.append("O Time que mais venceu em 2008 foi " + segundoTimeComMaisVitorias.getKey() + " com "
-				+ segundoTimeComMaisVitorias.getValue() + " vitórias.\n");
+		Long maxVitorias = timesComMaisVitorias.get(0).getValue();
+		Long maxEmpates = Collections.max(empatesDosTimesVencedores.values());
 
+		List<String> timesVencedores = new ArrayList<>();
+		for (Map.Entry<String, Long> time : timesComMaisVitorias) {
+		    Long empates = empatesDosTimesVencedores.getOrDefault(time.getKey(), 0L);
+		    textArea.append("O time " + time.getKey() + " venceu " + time.getValue() + " partidas e teve " + empates + " empates em 2008.\n");
+		    if (time.getValue().equals(maxVitorias) && empates.equals(maxEmpates)) {
+		        timesVencedores.add(time.getKey());
+		    }
+		}
+
+		if (!timesVencedores.isEmpty()) {
+		    for (String time : timesVencedores) {
+		        textArea.append("O time vencedor é " + time + ", com " + maxVitorias + " vitórias e com " + maxEmpates + " empates.\n");
+		    }
+		} else {
+		    textArea.append("Não há um time vencedor com o máximo de vitórias e empates.\n");
+		}
+		
 		Map.Entry<String, Long> estadoComMenosJogos = perguntasService
 				.timeComMenosJogos("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
 		textArea.append("O Estado que teve menos jogos entre 2003 e 2022 foi " + estadoComMenosJogos.getKey() + " com "

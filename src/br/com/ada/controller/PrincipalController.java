@@ -90,7 +90,7 @@ public class PrincipalController {
 		JButton creditosButton = new JButton("Créditos");
 		creditosButton.setBounds(25, 115, 120, 25);
 		creditosButton.addActionListener(e -> {
-		    JOptionPane.showMessageDialog(null, "Participantes :\nWillian Barbosa\nWillian Barbosa\n\nProfessor :\nWillian Barbosa");
+		    JOptionPane.showMessageDialog(null, "Participantes :\nWillian Barbosa\nLucas Vanzella\nCamila Bregalda\n\nProfessor :\nVinicius Conceição");
 		});
 		JLabel texto = new JLabel("ADA @ SANTANDER", SwingConstants.CENTER);
 		texto.setBounds(80, 130, 150, 50); 

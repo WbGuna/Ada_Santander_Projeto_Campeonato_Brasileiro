@@ -1,9 +1,11 @@
 package br.com.ada.service;
 
 import java.util.AbstractMap;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.ada.entity.CampeonatoBasileiroFull;
@@ -69,25 +71,35 @@ public class PerguntasService {
 				.orElse(null);
 	}
 
-	public Map.Entry<String, Long> timeQueMaisVenceu2008(String filePath) {
+	public Map.Entry<String, Long> timeQueMaisEmpatou2008(String filePath) {
 		List<CampeonatoBasileiroFull> partidas = fullService.loadData(filePath);
 		return partidas.stream().filter(partida -> partida.getData().getYear() == 2008)
 				.collect(Collectors.groupingBy(CampeonatoBasileiroFull::getVencedor, Collectors.counting())).entrySet()
 				.stream().max(Map.Entry.comparingByValue()).orElse(null);
 	}
 	
-	public Map.Entry<String, Long> timeQueMaisVenceu2008Dois(String filePath) {
+	public List<Map.Entry<String, Long>> timesQueMaisVenceram2008(String filePath) {
 	    List<CampeonatoBasileiroFull> partidas = fullService.loadData(filePath);
-	    return partidas.stream()
-	        .filter(partida -> partida.getData().getYear() == 2008 && !"-".equals(partida.getVencedor()))
-	        .collect(Collectors.groupingBy(CampeonatoBasileiroFull::getVencedor, Collectors.counting()))
-	        .entrySet().stream()
-	        .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
-	        .skip(1)
-	        .findFirst()
-	        .orElse(null);
+	    Map<String, Long> vitoriasPorTime = partidas.stream()
+	        .filter(partida -> partida.getData().getYear() == 2008 && !partida.getVencedor().equals("-"))
+	        .collect(Collectors.groupingBy(CampeonatoBasileiroFull::getVencedor, Collectors.counting()));
+	    Long maxVitorias = Collections.max(vitoriasPorTime.values());
+	    return vitoriasPorTime.entrySet().stream()
+	        .filter(entry -> entry.getValue().equals(maxVitorias))
+	        .collect(Collectors.toList());
 	}
 	
+	public Map<Object, Long> empatesDosTimesVencedores2008(String filePath, List<Map.Entry<String, Long>> timesVencedores) {
+	    List<CampeonatoBasileiroFull> partidas = fullService.loadData(filePath);
+	    Set<String> nomesDosTimesVencedores = timesVencedores.stream()
+	        .map(Map.Entry::getKey)
+	        .collect(Collectors.toSet());
+	    return partidas.stream()
+	        .filter(partida -> partida.getData().getYear() == 2008 && partida.getVencedor().equals("-"))
+	        .filter(partida -> nomesDosTimesVencedores.contains(partida.getMandante()) || nomesDosTimesVencedores.contains(partida.getVisitante()))
+	        .collect(Collectors.groupingBy(partida -> nomesDosTimesVencedores.contains(partida.getMandante()) ? partida.getMandante() : partida.getVisitante(), Collectors.counting()));
+	}
+		
 	public Map.Entry<String, Long> timeComMenosJogos(String filePath) {
 	    List<CampeonatoBasileiroFull> partidas = fullService.loadData(filePath);
 	    Map.Entry<String, Long> estadoComMenosJogos = partidas.stream()

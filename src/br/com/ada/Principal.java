@@ -1,5 +1,6 @@
 package br.com.ada;
 
+import java.util.List;
 import java.util.Map;
 
 import br.com.ada.entity.CampeonatoBasileiroFull;
@@ -40,14 +41,19 @@ public class Principal {
 				estatisticaService);
 
 		Map.Entry<String, Long> timeComMaisVitorias = perguntasService
-				.timeQueMaisVenceu2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
+				.timeQueMaisEmpatou2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
 		System.out.println("O time que mais venceu em 2008 foi " + timeComMaisVitorias.getKey() + " com "
 				+ timeComMaisVitorias.getValue() + " vitórias.");
-
-		Map.Entry<String, Long> segundoTimeComMaisVitorias = perguntasService
-				.timeQueMaisVenceu2008Dois("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
-		System.out.println("O segundo time que mais venceu em 2008 foi " + segundoTimeComMaisVitorias.getKey() + " com "
-				+ segundoTimeComMaisVitorias.getValue() + " vitórias.");
+		
+		List<Map.Entry<String, Long>> segundoTimeComMaisVitorias = perguntasService.timesQueMaisVenceram2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
+		if (!segundoTimeComMaisVitorias.isEmpty()) {
+			List<Map.Entry<String, Long>> timesComMaisVitorias = segundoTimeComMaisVitorias;
+			for (Map.Entry<String, Long> time : timesComMaisVitorias) {
+				System.out.println("O time " + time.getKey() + " venceu " + time.getValue() + " partidas em 2008.");
+			}
+		} else {
+		    System.out.println("Não houve vencedores em 2008.");
+		}
 
 		Map.Entry<String, Long> estadoComMenosJogos = perguntasService
 				.timeComMenosJogos("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
