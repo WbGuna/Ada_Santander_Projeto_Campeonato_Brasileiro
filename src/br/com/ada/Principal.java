@@ -42,8 +42,7 @@ public class Principal {
 
 		Map.Entry<String, Long> timeComMaisVitorias = perguntasService
 				.timeQueMaisEmpatou2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
-		System.out.println("O time que mais venceu em 2008 foi " + timeComMaisVitorias.getKey() + " com "
-				+ timeComMaisVitorias.getValue() + " vitórias.");
+		System.out.println("Quantidade de partidas com empate em 2008 foram " + timeComMaisVitorias.getValue() + " vitórias.");
 		
 		List<Map.Entry<String, Long>> segundoTimeComMaisVitorias = perguntasService.timesQueMaisVenceram2008("src/br/com/ada/arquivosCSV/campeonato-brasileiro-full.csv");
 		if (!segundoTimeComMaisVitorias.isEmpty()) {
